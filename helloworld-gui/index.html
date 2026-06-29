@@ -86,42 +86,73 @@
       line-height: 1.7;
     }
 
-    .route-strip {
+    .route-table {
       width: min(100%, 620px);
+      border-collapse: collapse;
       border: 1px solid var(--ink);
       background: rgba(255, 253, 248, 0.84);
       box-shadow: 8px 8px 0 rgba(32, 35, 31, 0.16);
     }
 
-    .route {
-      display: grid;
-      grid-template-columns: max-content minmax(0, 1fr);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .route:last-child {
-      border-bottom: 0;
-    }
-
-    .route code,
-    .route span {
-      min-height: 50px;
-      display: flex;
-      align-items: center;
+    .route-table thead th {
+      height: 40px;
       padding: 0 14px;
-    }
-
-    .route code {
-      border-right: 1px solid var(--line);
-      color: var(--blue);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 0.84rem;
-      font-weight: 800;
+      border-bottom: 2px solid var(--ink);
+      background: #ebe5d8;
+      color: var(--ink);
+      font-size: 0.75rem;
+      font-weight: 900;
+      text-align: left;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
       white-space: nowrap;
     }
 
-    .route span {
+    .route-table thead th + th {
+      border-left: 1px solid var(--line);
+    }
+
+    .route-table tbody tr {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .route-table tbody tr:last-child {
+      border-bottom: 0;
+    }
+
+    .route-table tbody tr:hover {
+      background: rgba(255, 176, 0, 0.06);
+    }
+
+    .route-table td {
+      height: 50px;
+      padding: 0 14px;
+      vertical-align: middle;
+    }
+
+    .route-table td + td {
+      border-left: 1px solid var(--line);
+    }
+
+    .route-table .method {
+      color: var(--blue);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.78rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .route-table .path {
+      color: var(--ink);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.84rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .route-table .desc {
       color: var(--muted);
+      font-size: 0.9rem;
       line-height: 1.35;
     }
 
@@ -357,19 +388,13 @@
         padding: 24px 0;
       }
 
-      .route,
       .control-row {
         grid-template-columns: 1fr;
       }
 
-      .route code {
-        min-height: 40px;
-        border-right: 0;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .route span {
-        min-height: 46px;
+      .route-table .method,
+      .route-table .path {
+        white-space: normal;
       }
 
       .console-body {
@@ -397,20 +422,32 @@
         navigateur, nginx, proxy `/api`, puis réponse JSON du service Rust.
       </p>
 
-      <div class="route-strip" aria-label="Routes disponibles">
-        <div class="route">
-          <code>GET /</code>
-          <span>Message par défaut du service.</span>
-        </div>
-        <div class="route">
-          <code>GET /hello/:name</code>
-          <span>Construit une salutation JSON avec le prénom saisi.</span>
-        </div>
-        <div class="route">
-          <code>GET /health</code>
-          <span>Contrôle rapide utilisé par cette page.</span>
-        </div>
-      </div>
+      <table class="route-table" aria-label="Routes disponibles">
+        <thead>
+          <tr>
+            <th>Méthode</th>
+            <th>Route</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="method">GET</td>
+            <td class="path">/</td>
+            <td class="desc">Message par défaut du service.</td>
+          </tr>
+          <tr>
+            <td class="method">GET</td>
+            <td class="path">/hello/:name</td>
+            <td class="desc">Construit une salutation JSON avec le prénom saisi.</td>
+          </tr>
+          <tr>
+            <td class="method">GET</td>
+            <td class="path">/health</td>
+            <td class="desc">Contrôle rapide utilisé par cette page.</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
     <section class="console" aria-label="Tester l'API helloworld">
