@@ -1,5 +1,5 @@
 include:
-  - project: root/ci-templates
+  - project: infra/ci-templates
     ref: v1.13.1
     file: /gitlab-ci.yml
 
